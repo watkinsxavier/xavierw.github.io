@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> GeoTag Interactive Mapping Exercise</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+</head>
+<style>
+
+.sidebar {
+  position: absolute;
+  left: 0px;
+  width: 250px;
+  top: 0;
+  bottom: 0;
+  overflow-y: auto;
+  padding: 20px;
+  font-size: 16px;
+  border: solid;
+  background-color: #add8e6;
+}
+.main-heading {
+    font-size: 15px;
+}
+</style>
+<body>
+  <div class="sidebar">
+  <font color="#3D9970"><center><h2 id="main-heading" >GeoTag Mapping</h2></center></font>
+  <div>
+
+<div class="row">
+  <div class="column">
+    <center> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTedfj3Fj2EfxMjb5Ul3ZpRM5EJ2RmTgyMgg&s" alt="Temple Logo" style="width:60%"> </center>
+  </div>
+  <font color="MidnightBlue"><center><h3> I love college!</h3></center></font>
+  </div>
+
+<h1> University of North Carolina at Chappel Hill </h1>
+<h2> Academic Building Spotlight: George Watts Alumni Center </h2>
+<h3> Located at the heart of Carolina, adjacent to Kenan Stadium, the George Watts Hill Alumni Center occupies a prominent spot on the historic student footpath connecting the north and south campuses. </h3>
+
+<footer>
+       <p> Share this template! <br> https://github.com/mckeont/GeoTag </p>
+</footer>
+
+    <div id="map" style=" position: fixed; right: 0; left: 300px; top: 0; bottom: 0 "></div>
+
+    <!-- JS IMPORTS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src= "http://leaflet.github.io/Leaflet.heat/dist/leaflet-heat.js"></script>
+    <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src= "js/setup.js"></script>
+    <script src= "js/georgewatts.js"></script>
+
+    <script>
+
+// Create a style variable
+    var myStyle = {
+    radius: 5,
+    fillColor: "#ff7800",
+    color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.7
+};
+
+//Load in geojson
+    var georgewatts =   L.geoJSON(georgewatts, {
+          style: myStyle
+        }).bindPopup(function (layer) {
+       return "" + layer.feature.properties.name
+    }).addTo(map).bringToBack();
+
+// Make a simple circle
+var circle = L.circle([35.9070289, -79.0460952], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 5
+}).addTo(map);
+
+// Make a shape
+var polygon = L.polygon([
+    [-79.04627483831932,35.90840860955453],
+    [ -79.04627234053572,35.90842782893857],
+    [-79.04625985162076,35.908424794299236],
+    [-79.04624986048864,35.90845817532562],
+    [-79.04634477624579,35.908475371606215],
+]).addTo(map);
+
+// Add a marker
+L.marker([35.9070289, -79.0460952]).addTo(map);
+    </script>
+
+</body>
+</html>
